@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>团队表格</title>
+    <link rel="stylesheet" href="../static/layui/css/layui.css">
+    <style>
+        #demo{
+            width: 100%;
+            margin: 0 auto;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+        }
+        h2{
+            text-align: center;
+            margin-top: 30px;
+        }
+        .wai{
+            width: 60%;
+            margin: 50px auto;
+        }
+        #editForm{
+            display: none;
+            margin-top: 40px;
+            padding-right: 40px;
+        }
+    </style>
+</head>
+<body>
+<h2>新闻资讯查询页面</h2>
+<div class="wai">
+    <!--1.表格-->
+    <table id="demo" lay-filter="test"></table>
+    <!--2.图标按钮-->
+    <script type="text/html" id="barDemo">
+        <a class="layui-btn layui-btn-xs" lay-event="edit" onclick="edits({{d.nid}})"> <i class="layui-icon" style="font-size: 80px;">&#xe642;</i></a>
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del" onclick="dels({{d.nid}})">
+            <i class="layui-icon" style="font-size: 80px;">&#xe640;</i>
+        </a>
+    </script>
+</div>
+
+<!--编辑弹窗内容-->
+<form class="layui-form" action="" id="editForm">
+    <!--1.id-->
+    <input type="hidden" name="nid">
+    <!--1.新闻标题-->
+    <div class="layui-form-item">
+        <label class="layui-form-label">新闻标题</label>
+        <div class="layui-input-block">
+            <input type="text" name="ntitle" required  lay-verify="required" placeholder="请输入新闻标题" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <!--2.新闻内容-->
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">新闻内容</label>
+        <div class="layui-input-block">
+            <textarea name="ncontent" placeholder="请输入新闻内容" class="layui-textarea"></textarea>
+        </div>
+    </div>
+    <!--3.新闻排序-->
+    <div class="layui-form-item">
+        <label class="layui-form-label">新闻排序</label>
+        <div class="layui-input-block">
+            <input type="text" name="nsort" required  lay-verify="required" placeholder="请输入新闻排序" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <!--4.确认按钮-->
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="formDemo">确认修改</button>
+            <button type="reset" class="layui-btn layui-btn-primary">取消</button>
+        </div>
+    </div>
+
+</form>
+<!--删除弹窗内容-->
+</body>
+</html>
+<script src="../static/layui/layui.js"></script>
+<script>
+    var layer,$,form,index,delindex,table;
+    layui.use(['table','layer','jquery','form'], function(){
+        table = layui.table;
+        layer=layui.layer;
+        $=layui.jquery;
+        form=layui.form;
+
+        //方法渲染
+        table.render({
+            elem: '#demo',
+            url: 'news.php?type=querys',
+            page:true,
+            limit:5,
+            limits:[5,10,15,20],
+            cols: [[ //表头
+                {field: 'nid', title: 'ID',sort: true, fixed: 'left'},
+                {field: 'ntitle', title:'新闻标题',width:'40%'},
+                {field: 'ncontent', title: '新闻内容',width:'30%'},
+                {field: 'ncreate_time', title: '创建时间',width:'25%'},
+                {field: 'nupdate_time', title: '更新时间',width:'25%'},
+                {field: 'nsort', title: '新闻排序',width:'20%'},
+                {fixed: 'right', title:'操作', toolbar: '#barDemo',width:'20%'}
+            ]]
+        });
+
+        //修改数据
+        form.on('submit(formDemo)',function (data) {
+            $.post('news.php?type=updates',data.field,function (res) {
+                let data=JSON.parse(res);
+                if (data.code==200){
+                    layer.close(index);
+                    layer.msg(data.msg,{icon:6})
+                    table.reload('demo')
+                }else{
+                    layer.msg(data.msg,{icon:5});
+                }
+            });
+            return false;
+        })
+    });
+    //点击编辑按钮
+    function edits(nid) {
+        index=layer.open({
+            type:1,
+            title:'修改团队信息',
+            area:['400px','300px'],
+            skin:'layui-layer-molv',
+            content:$('#editForm')
+        });
+        console.log(nid);
+        //当前这条数据
+        $.get('news.php?type=queryone',{nid:nid},function (res) {
+            // 跳到php处理
+            let data=JSON.parse(res);
+            // console.log(data);
+            if(data.code==200){
+                $("input[name='nid']").val(data.data.nid);
+                $("input[name='ntitle']").val(data.data.ntitle);
+                $("textarea[name='ncontent']").val(data.data.ncontent);
+                $("input[name='nupdate_time']").val(data.data.nupdate_time);
+                $("input[name='nsort']").val(data.data.nsort);
+            }else{
+                layer.msg(data.msg);
+            }
+        })
+    }
+    //点击删除按钮
+    function dels(nid) {
+        //询问框
+        delindex=layer.confirm('您确定要删除吗？', {
+                title:'删除',
+                skin:'layui-layer-molv',
+                btn: ['确定','取消'] //按钮
+            },
+            function(){
+                $.get('news.php?type=deletes',{nid:nid},function (res) {
+                    let data=JSON.parse(res);
+                    if (data.code==200){
+                        layer.close(delindex);
+                        layer.msg(data.msg,{icon:1});
+                        table.reload('demo')
+                    }else{
+                        layer.msg(data.msg,{icon:2});
+                    }
+                })
+            },
+            function () {
+                layer.close(delindex);
+            })
+    }
+
+</script>

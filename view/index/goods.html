@@ -1,0 +1,91 @@
+<?php
+	//获取所有产品分类
+	$category=$mysqli->query("select * from category")->fetch_all(MYSQLI_ASSOC);
+	//将“全部分“添加到产品分类里面
+	$cate=[['cid'=>0,'cname'=>'全部','csort'=>999]];
+	$cate=array_merge($cate,$category);
+	//var_dump($cate);
+	//获取cate的长度
+	$count=count($cate);
+	//查询所有的商品
+	$goods=$mysqli->query("select gid,gname,gthumb from goods")->fetch_all(MYSQLI_ASSOC);
+	//var_dump($goods);
+	//将goods中查询出来的字段添加到count中
+	for($i=0;$i<$count;$i++){
+	$cid=$cate[$i]['cid'];
+	//var_dump($cid);
+	if($cid==0){
+	$cate[$i]['good']=$goods;
+	//var_dump($cate);
+	continue;
+	}
+	$good1=$mysqli->query("select gid,gname,gthumb from goods where cid=$cid")->fetch_all(MYSQLI_ASSOC);
+	$cate[$i]['good']=$good1;
+	}
+	//var_dump($cate)
+?>
+
+
+<link rel="stylesheet" type="text/css" href="../static/index/css/index.css" />
+<link rel="stylesheet" type="text/css" href="../static/index/css/aboutus.css" />
+<link rel="stylesheet" type="text/css" href="../static/index/css/goods.css" />
+
+		<div class="banner2"><img src="../static/index/img/ban3.jpg" /></div>
+		<!--主体-->
+		<div class="content">
+			<!--标题1-->
+			<div class="yao21">
+				<div class="yao21-zi">
+					<h1>产品中心</h1>
+					<p>Products</p>
+				</div>
+			</div>
+
+			<!--四图-->
+			<ul class="xiaonav">
+				<?php foreach($cate as $v){ ?>
+				<li><?php echo $v['cname']?></li>
+				<?php }?>
+			</ul>
+			<div class="card">
+				<!--选卡1-->
+				<?php foreach($cate as $v){ ?>
+				<ul class="situ3">
+					<?php foreach($v['good'] as $g){ ?>
+					<li>
+						<a href="detail.php?gid=<?php echo $g['gid'] ?>">
+							<div class="tu43"><img src="../<?php echo $g['gthumb']?>" /></div>
+							<div id="tu4zi31"><?php echo $g['gname']?></div>
+						</a>
+					</li>
+					<?php }?>
+				</ul>
+				<?php }?>
+			</div>
+		</div>
+
+	<script type="text/javascript">
+		var goodsList = document.querySelectorAll('.xiaonav>li');
+		var goodsContent = document.querySelectorAll('.card>ul');
+//		console.log(goodsList);
+//		console.log(goodsContent);
+//		初始化第一个内容
+		goodsContent[0].style.display="block";
+//		遍历list
+		goodsList.forEach(function(value,index){
+//			console.log(value);
+			value.onclick=function(){
+				//遍历对应内容
+				goodsContent.forEach((v,i)=>{
+					 v.style.display="none";
+					 goodsList[i].className="";
+				})
+				goodsList[index].className="active";
+				goodsContent[index].style.display="block";
+			 
+			}
+		})
+		
+		 
+		
+	</script>

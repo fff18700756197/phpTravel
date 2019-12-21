@@ -1,0 +1,168 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+li{
+	list-style: none;
+}
+.li_first2{
+	color: #ff6000;
+}
+.banner2{
+	width: 1024px;
+	height: 272px;
+	/*background: red;*/
+	margin: 30px auto;
+}
+.banner2 img{
+	width: 1024px;
+	height: 272px;
+}
+
+.yao21{
+	width: 1024px;
+	height: 105px;
+	margin: -15px auto;
+	/*background: red;*/
+}
+.yao21-zi{
+	width: 128px;
+	height: 105px;
+	margin: 0 auto;
+	text-align: center;
+	/*background: blue;*/
+	position: relative;
+}
+
+.yao21-zi:before{
+	content: "";
+	display: block;
+	width: 382px;
+	height: 3px;
+	position: absolute;
+	top: 55px;
+	left: -411px;
+	border-bottom: 1px solid #999;
+}
+.yao21-zi:after{
+	content: "";
+	display: block;
+	width: 382px;
+	height: 3px;
+	position: absolute;
+	top: 55px;
+	left: 162px;
+	border-bottom: 1px solid #999;
+}
+.yao21-zi h1{
+	color: #333333;
+	margin-top: 30px;
+	position: absolute;
+	top: -10px;
+}
+.yao21-zi p{
+	color: #a5a5a5;
+	font-size: 14px;
+	position: absolute;
+	top: 65px;
+	left: 30px;
+}
+.yao21-zi .p2{
+	position: absolute;
+	top: 65px;
+	left: 20px;
+}
+/*hezi*/
+.dahe21{
+	width: 1024px;
+	height: 324px;
+	/*background: blueviolet;*/
+	margin: 20px auto;
+	margin-bottom: 50px;
+	
+}
+.dahe21-l{
+	width: 442px;
+	height: 295px;
+	margin-top: 30px;
+	margin-left: 20px;
+	margin-right: 30px;
+	float: right;
+}
+.dahe21-l img{
+	width: 442px;
+	height: 295px;
+}
+
+.dahe21-r{
+	width: 492px;
+	height: 309px;
+	color: #333;
+	letter-spacing: 3px;
+	margin-top: 20px;
+	margin-left: 20px;
+	float: right;
+}
+ 
+.dahe-r-zi1{
+	width: 492px;
+	height: auto;
+	color: #666;
+	/*margin-top: 20px;*/
+	margin-bottom: 30px;
+	font-size: 14px;
+}
+.dahe-r-zi2{
+	width: 492px;
+	height: auto;
+	color: #666;
+	font-size: 14px;
+}
+
+/*4图*/
+
+.situ2{
+	width: 1024px;
+	height: 303px;
+	margin: 50px auto;
+	/*background: blue;*/
+}
+.situ2 li{
+	width: 236px;
+	height: 289px;
+	/*background: saddlebrown;*/
+	margin: 0 10px;
+	text-align: center;
+	float: left;
+}
+.tu42{
+	width: 236px;
+	height: 200px;
+	/*background: lawngreen;*/
+}
+.situ2 li img{
+	display: block;
+	width: 196px;
+	height: 200px;
+	border-radius: 50%;
+	margin: 0 auto;
+	
+}
+.tuzi2{
+	margin:15px auto;
+	text-align: center;
+}
+#tu4zi_1{
+	color: #333;
+	font-size: 26px;
+	font-weight: 700;
+	
+}
+#tu4zi2{
+	margin: 10px auto;
+	color: #ff6000;
+	font-size: 14px;
+	font-weight: 700;
+	text-align: center;
+	 
+}

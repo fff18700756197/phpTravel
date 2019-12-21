@@ -1,0 +1,50 @@
+.banner5{
+	width: 1024px;
+	height: 205px;
+	/*background: red;*/
+	margin: 30px auto;
+}
+.banner5 img{
+	width: 1024px;
+	height: 205px;
+}
+
+/*hezi*/
+/*盒2*/
+.dahe51{
+	width: 984px;
+	height: 258px;
+	/*background: blueviolet;*/
+	margin: 20px auto;
+	padding: 0 40px;
+	/*text-align: center;*/
+	
+}
+.dahe51-r{
+	width: 1024px;
+	height: 258px;
+
+	float: right;
+}
+ 
+.dahe-r-zi51{
+	width: 950px;
+	height: 20px;
+	margin-top: 10px;
+	color: #333;
+	font-size: 14px;
+	line-height: 20px;
+	border-bottom: 1px dashed #999;
+}
+.dahe-r-zi51:hover{
+	color: #FF6000;
+}
+.dahe-r-zi51 span:hover{
+	color: #FF6000;
+}
+.dahe-r-zi51 span{
+	margin-left: 635px;
+	color: #999;
+	font-size: 12px;
+}
+ 

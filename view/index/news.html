@@ -1,0 +1,36 @@
+<?php
+	$news=$mysqli->query("select nid,ntitle,nupdate_time from news order by nid asc limit 6")->fetch_all(MYSQLI_ASSOC);
+?>
+
+<link rel="stylesheet" type="text/css" href="../static/index/css/index.css" />
+<link rel="stylesheet" type="text/css" href="../static/index/css/aboutus.css" />
+<link rel="stylesheet" type="text/css" href="../static/index/css/service.css" />
+<link rel="stylesheet" type="text/css" href="../static/index/css/news.css" />
+
+		<!--baner5-->
+		<div class="banner5"><img src="../static/index/img/ban5.jpg" /></div>
+
+		<!--主体-->
+		<div class="content">
+			<!--标题1-->
+			 <div class="yao21">
+			 	<div class="yao21-zi">
+			 		<h1>养护知识</h1>
+			 		<p>Knowledgement</p>
+			 	</div>
+			 </div>
+			
+			<ul class="situ">
+				 <div class="dahe51">
+					 <?php foreach($news as $v) { ?>
+					 <a href="newsdetail.php?nid=<?php echo $v['nid']?>">
+						 <div class="dahe-r-zi51">
+							 <?php echo $v['ntitle'] ?><span><?php echo $v['nupdate_time'] ?></span>
+						 </div>
+					 </a>
+					 <?php } ?>
+				 </div>
+			</ul>
+		
+			<div class="banner5"><img src="../static/index/img/ban52.jpg" /></div>
+		</div>

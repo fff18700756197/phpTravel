@@ -1,0 +1,59 @@
+<link rel="stylesheet" type="text/css" href="../static/index/css/index.css" />
+<link rel="stylesheet" type="text/css" href="../static/index/css/aboutus.css" />
+<link rel="stylesheet" type="text/css" href="../static/index/css/service.css" />
+<link rel="stylesheet" type="text/css" href="../static/index/css/news.css" />
+<link rel="stylesheet" type="text/css" href="../static/index/css/newsdetail.css" />
+		<!--baner5-->
+		<div class="banner5"><img src="../static/index/img/ban5.jpg" /></div>
+
+		<!--主体-->
+		<div class="content">
+			<!--标题1-->
+			<div class="yao21">
+				<div class="yao21-zi">
+					<h1>养护知识</h1>
+					<p>Knowledgement</p>
+				</div>
+			</div>
+
+			<div class="dahe81">
+				<h1><div class="zi81"><?php echo $know['ntitle'] ?></div></h1>
+				<div class="zi82">
+					<span>发布日期：</span><?php echo $know['nupdate_time'] ?>
+				</div>
+				<div class="dahe81zi">
+					<div class="zi83">
+						<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;汽车电瓶是汽车得以正常行驶不可或缺的动力来源之一，如何避免非正常使用缩短汽车电瓶使用寿命，并延长其使用时间是很多车主关心的问题。</span>
+					</div>
+					<div class="zi84">
+						<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;正常情况下，一块车载电瓶的使用寿命为4年，而电瓶寿命的长短与气候情况以及车主的使用习惯也有很大的关系。常见的折损电瓶寿命的因素包括：空 气湿度、灰尘、腐蚀、电极松动或过紧、磨损以及汽车电缆的损坏。在极端情况下，这些因素都可能引起电瓶破裂甚至是更加严重的事故，而湿度和灰尘则被认作是 两个最常见的罪魁祸首。</span>
+					</div>
+					<div class="zi85">
+						<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;保持电池的干净整洁，并进行定期检测是延长汽车电瓶使用寿命的有效手段，而对汽车电瓶的清洁不同于日常物品，仅用抹布外加清洁用油进行擦拭还远远不够。</span>
+					</div>
+					<div class="zi86">
+						<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在清洁过程中首先需要注意检查工作环境是否有明火，尤其注意在清洁期间禁止吸烟，当发动机熄火的时候还应该注意断开电池负极与汽车电缆连接。因 为汽车电池内含大量硫磺的酸会产生易燃氢气，遇明火容易产生爆炸发生危险。然后要记得在清洁开始前以及结束后将所有物品拭干避免短路发生。</span>
+					</div>
+				</div>
+				<div class="zi87">
+					<?php if($pre){ ?>
+						<a href="newsdetail.php?nid=<?php echo $preId ?>">
+							<span>上一篇&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $preTitle ?></span>
+						</a>
+					<?php }else{ ?>
+						<a href="javascript:;">
+							<span>上一篇&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;没有了</span>
+						</a>
+					<?php } ?>
+				</div>
+				<div class="zi88">
+
+					<a href="news.html">
+						<span>没有了&nbsp;&nbsp;&nbsp;&nbsp;下一篇</span>
+					</a>
+				</div>
+				<a href="navigator.php?page_id=5"><div class="btn8">返回列表</div></a>
+			</div>
+
+			<div class="banner5"><img src="../static/index/img/ban52.jpg" /></div>
+		</div>

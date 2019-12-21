@@ -1,0 +1,89 @@
+.li_first3{
+	color: #ff6000;
+}
+.xiaonav{
+	width: 974px;
+	height: 31px;
+	/*line-height: 31px;*/
+	/*color: #FF6000;
+	font-size: 14px;*/
+	/*background: #999;*/
+	margin: 0 auto;
+	margin-top: 40px;
+}
+.xiaonav li{
+	width: auto;
+	height: 22px;
+	color: #FF6000;
+	font-size: 14px;
+	text-align: center;
+	word-spacing: normal;
+	margin-right: -25px;
+	float: left;
+}
+.xiaonav li:first-child{
+	margin-left: 0;
+}
+.xiaonav li a{
+	color: #f0443a;
+}
+
+.card{
+	width: 974px;
+	height: auto;
+	margin: 20px auto;
+}
+.situ3{
+	width: 974px;
+	height: auto;
+	margin: 20px auto;
+	margin-bottom: 40px;
+	display: none;
+	overflow: hidden;
+}
+.situ3 li{
+	width: 233px;
+	height: 249px;
+	margin-bottom: 30px;
+	margin-left: 0;
+	margin-right: 10px;
+	float: left;
+}
+.situ3 li:hover #tu4zi31{
+	color: #FF6000;
+}
+
+.situ3 li:nth-child(4n){
+	margin-right: 0px;
+}
+.tu43{
+	width: 215px;
+	height: 215px;
+	border: 1px solid #3e3e3e;
+}
+.tu43 img{
+	width: 214px;
+	height: 214px;
+}
+
+#tu4zi31{
+	width: 214px;
+	height: 20px;
+	color: #373A41;
+    line-height: 20px;
+    text-align: center;
+    margin-top: 20px;
+    font-weight: bold;
+    font-weight: bold;
+}
+
+/*移入*/ 
+.active{
+	border-bottom: 1px #F0443A dashed;
+}
+.xiaonav li:hover{
+	border-bottom: 1px #F0443A dashed;
+	cursor: pointer;
+}
+ 
+

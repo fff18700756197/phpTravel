@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>团队表格</title>
+    <link rel="stylesheet" href="../static/layui/css/layui.css">
+    <style>
+        #demo{
+            width: 100%;
+            margin: 0 auto;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+        }
+        h2{
+            text-align: center;
+            margin-top: 30px;
+        }
+        .wai{
+            width: 60%;
+            margin: 50px auto;
+        }
+        #editForm{
+            display: none;
+            margin-top: 40px;
+            padding-right: 40px;
+        }
+    </style>
+</head>
+<body>
+<h2>在线预约查询页面</h2>
+<div class="wai">
+    <!--1.表格-->
+    <table id="demo" lay-filter="test"></table>
+    <!--2.图标按钮-->
+    <script type="text/html" id="barDemo">
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del" onclick="dels({{d.oid}})">
+            <i class="layui-icon" style="font-size: 80px;">&#xe640;</i>
+        </a>
+    </script>
+</div>
+
+<!--删除弹窗内容-->
+
+</body>
+</html>
+<script src="../static/layui/layui.js"></script>
+<script>
+    var layer,$,form,index,delindex,table;
+    layui.use(['table','layer','jquery'], function(){
+        table = layui.table;
+        layer=layui.layer;
+        $=layui.jquery;
+
+        //方法渲染
+        table.render({
+            elem: '#demo',
+            url: 'online.php?type=querys',
+            page:true,
+            limit:5,
+            limits:[5,10,15,20],
+            cols: [[ //表头
+                {field: 'oid', title: 'ID',sort: true, fixed: 'left'},
+                {field: 'sid', title: '服务分类',width: '13%'},
+                {field: 'date', title: '预约日期',width: '25%'},
+                {field: 'name', title:'用户姓名',width: '13%'},
+                {field: 'sex', title: '用户性别',width: '13%'},
+                {field: 'tel', title: '用户电话',width: '13%'},
+                {field: 'remark', title: '用户备注',width: '25%'},
+                {fixed: 'right', title:'操作', toolbar: '#barDemo'}
+            ]]
+        });
+
+    });
+
+    //点击删除按钮
+    function dels(oid) {
+        //询问框
+        delindex=layer.confirm('您确定要删除吗？', {
+                title:'删除',
+                skin:'layui-layer-molv',
+                btn: ['确定','取消'] //按钮
+            },
+            function(){
+                $.get('online.php?type=deletes',{oid:oid},function (res) {
+                    let data=JSON.parse(res);
+                    if (data.code==200){
+                        layer.close(delindex);
+                        layer.msg(data.msg,{icon:1});
+                        table.reload('demo')
+                    }else{
+                        layer.msg(data.msg,{icon:2});
+                    }
+                })
+            },
+            function () {
+                layer.close(delindex);
+            })
+    }
+
+</script>

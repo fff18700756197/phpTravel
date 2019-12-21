@@ -1,0 +1,45 @@
+<?php
+$aboutus=$mysqli->query("select * from about_us where uid=1")->fetch_assoc();
+$team=$mysqli->query('select * from team limit 4')->fetch_all(MYSQLI_ASSOC);
+?>
+		<link rel="stylesheet" type="text/css" href="../static/index/css/index.css" />
+		<link rel="stylesheet" type="text/css" href="../static/index/css/aboutus.css" />
+
+			<div class="banner2"><img src="../static/index/img/ban2.jpg" /></div>
+
+		<!--主体-->
+		<div class="content">
+			<!--标题1-->
+			 <div class="yao21">
+			 	<div class="yao21-zi">
+			 		<h1>关于我们</h1>
+			 		<p>About&nbsp;&nbsp;&nbsp;us</p>
+			 	</div>
+			 </div>
+			 
+			<div class="dahe21">
+				<div class="dahe21-l"><img src="../static/index/img/dahe1.jpg"/></div>
+				<div class="dahe21-r">
+					<?php echo $aboutus['content'] ?>
+				</div>
+			</div>
+			<!--标题1-->
+			 <div class="yao21">
+			 	<div class="yao21-zi">
+			 		<h1>维修师傅</h1>
+			 		<p class="p2">Master&nbsp;&nbsp;Team</p>
+			 	</div>
+			 </div>
+			<!--四图-->
+			<ul class="situ2">
+				<?php foreach($team as $v){ ?>
+					<li>
+						<div class="tu42"><img src="../<?php echo $v['head_img']?>"/></div>
+						<div class="tuzi2"><span id="tu4zi_1"><strong><?php echo $v['tname']?></strong></span></div>
+						<div id="tu4zi2"><?php echo $v['position']?></div>
+					</li>
+				<?php } ?>
+				 
+			</ul>
+
+		</div>

@@ -1,0 +1,191 @@
+.banner7{
+	width: 100%;
+	height: 272px;
+	/*background: red;*/
+	margin: 0 auto;
+}
+.banner7 img{
+	width:100%;
+	height: 272px;
+}
+.yao7{
+	height: 42px;
+	margin: 0 auto;
+	text-align: center;
+	margin-top: 50px;
+	
+}
+
+/*轮播*/
+.swiper-container{
+	width: 350px;
+	height: 325px;
+	/*background: darkblue;*/
+	position: absolute;
+	top: 0;
+	left: 100px;
+}
+.swiper-wrapper{
+	transform: translate3d(-15600px, 0px, 0px); 
+	transition-duration: 0ms;
+}
+
+.swiper-slide {
+	display: block;
+	width: 300px;
+	height: 300px;
+	margin: 13px auto;
+}
+.swiper-slide img{
+	width: 300px;
+	height: 300px;
+}
+.swiper-button-next{
+	width: 30px;
+	height: 30px;
+}
+.swiper-button-prev{
+	width: 30px;
+	height: 30px;
+}
+.swiper-pagination-bullet{
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+	margin-top: 20px;
+	/*background: #666666;*/
+}
+
+
+/*展示*/
+.zhanshi{
+	widows: 1024px;
+	height: 700px;
+	/*background: navajowhite;*/
+	margin: 20px auto;
+	position: relative;
+}
+.zhanshi_1{
+	width: 482px;
+	height: 325px;
+	/*background: darkblue;*/
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+.zhanshi_1 img{
+	display: block;
+	width: 300px;
+	height: 300px;
+	margin: 13px auto;
+}
+.zhanshi_2{
+	width: 492px;
+	height: 205px;
+	/*background: firebrick;*/
+	position: absolute;
+	top: 0;
+	left: 530px;
+}
+.zhanshi_21{
+	height: 25px;
+	color:#808080;
+	font-size: 14px;
+/*	margin: 0 auto;*/
+	margin-top: 50px;
+}
+.zhanshi_22{
+	height: 29px;
+	color:#808080;
+	font-size: 14px;
+	margin-top: 20px;
+}
+.zhanshi_22 span:last-child{
+	color:#E40000;	
+	font-size: 26px;
+}
+.zhanshi_23{
+	width: 492px;
+	height: 28px;
+	border-bottom: 1px dashed #808080;;
+	margin: 10px auto;
+}
+.zhanshi_24{
+	height: 25px;
+	color:#808080;
+	font-size: 14px;
+/*	margin: 0 auto;*/
+	margin-top: 20px;
+}
+
+.zhanshi_3{
+	width: 985px;
+	height: 345px;
+	/*background: darkgreen;*/
+	position: absolute;
+	/*top: 300px;*/
+	bottom: 0;
+	left: 0;
+}
+.zhanshi_31{
+	width: 985px;
+	height: 25px;
+	color: #3e3e3e;
+	font-size:22px;
+	margin-top: 30px;
+}
+.zhanshi_32{
+	width: 985px;
+	height: 80px;
+	font-size:16px;
+	color: rgb(141, 144, 149);
+	margin-top: 30px;
+}
+.zhanshi_33{
+	width: 985px;
+	height: 150px;
+	margin-top: 30px;
+	color: rgb(141, 144, 149);
+	font-size:16px;
+}
+
+ 
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

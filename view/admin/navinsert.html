@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../static/layui/css/layui.css">
+    <style>
+        form{
+            width: 500px;
+            height: 300px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+        }
+        h2{
+            text-align: center;
+            margin-top: 30px;
+            margin-bottom: 20px;
+        }
+        img{
+            width: 100px;
+        }
+
+    </style>
+</head>
+<body>
+<h2>导航添加页面</h2>
+<form class="layui-form" action="">
+    <!--1.导航名称-->
+    <div class="layui-form-item">
+        <label class="layui-form-label">导航名称</label>
+        <div class="layui-input-block">
+            <input type="text" name="name" required  lay-verify="required" placeholder="请输入导航名称" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <!--2.导航排序-->
+    <div class="layui-form-item">
+        <label class="layui-form-label">导航排序</label>
+        <div class="layui-input-block">
+            <input type="text" name="nsort" required  lay-verify="required" placeholder="请输入导航排序" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <!--3.导航模板-->
+    <div class="layui-form-item">
+        <label class="layui-form-label">导航模板</label>
+        <div class="layui-input-block">
+            <input type="text" name="ntmp" required  lay-verify="required" placeholder="请输入导航模板" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+
+    <!--5.导航按钮-->
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+    </div>
+
+</form>
+
+</body>
+</html>
+<script src="../static/layui/layui.js"></script>
+<script>
+    //JavaScript代码区域
+    layui.use(['layer','form','jquery','upload'],function(){
+        var {layer,form,$,upload}=layui;//解构赋值
+
+        form.on('submit(formDemo)',function (data) {
+            $.ajax({
+                type:"post",
+                url:"navinsert.php",
+                data:data.field,
+                dataType:"json",
+                success:function (res) {
+                   if (res.code==200){
+                       //弹出层
+                       layer.msg(res.msg);
+                   }else{
+                       //弹出层
+                       layer.msg(res.msg);
+                   }
+                }
+            })
+            return false;
+        })
+    });
+</script>

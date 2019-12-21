@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>团队表格</title>
+    <link rel="stylesheet" href="../static/layui/css/layui.css">
+    <style>
+        #demo{
+            width: 100%;
+            margin: 0 auto;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+        }
+        h2{
+            text-align: center;
+            margin-top: 30px;
+        }
+        .wai{
+            width: 60%;
+            margin: 50px auto;
+        }
+        #editForm{
+            display: none;
+            margin-top: 40px;
+            padding-right: 40px;
+        }
+    </style>
+</head>
+<body>
+<h2>团队查询页面</h2>
+<div class="wai">
+    <!--1.表格-->
+    <table id="demo" lay-filter="test"></table>
+    <!--2.图标按钮-->
+    <script type="text/html" id="barDemo">
+        <a class="layui-btn layui-btn-xs" lay-event="edit" onclick="edits({{d.tid}})"> <i class="layui-icon" style="font-size: 80px;">&#xe642;</i></a>
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del" onclick="dels({{d.tid}})">
+            <i class="layui-icon" style="font-size: 80px;">&#xe640;</i>
+        </a>
+    </script>
+</div>
+
+<!--编辑弹窗内容-->
+<form class="layui-form" action="" id="editForm">
+    <!--1.id-->
+    <input type="hidden" name="tid">
+    <!--1.团队名称-->
+    <div class="layui-form-item">
+        <label class="layui-form-label">团队名称</label>
+        <div class="layui-input-block">
+            <input type="text" name="tname" required  lay-verify="required" placeholder="请输入团队名称" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <!--2.团队职位-->
+    <div class="layui-form-item">
+        <label class="layui-form-label">团队职位</label>
+        <div class="layui-input-block">
+            <input type="text" name="position" required  lay-verify="required" placeholder="请输入团队职位" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <!--3.团队头像-->
+    <div class="layui-form-item">
+        <label class="layui-form-label">团队头像</label>
+        <div class="layui-input-block">
+            <div class="layui-upload">
+                <input type="hidden" name="head_img" value="">
+                <button type="button" class="layui-btn" id="test1"><i class="layui-icon"></i>上传图片</button>
+                <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;">
+                    预览图：
+                    <img id="demo1" src="" alt="" width="50%">
+                </blockquote>
+            </div>
+        </div>
+    </div>
+    <!--4.确认按钮-->
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="formDemo">确认修改</button>
+            <button type="reset" class="layui-btn layui-btn-primary">取消</button>
+        </div>
+    </div>
+
+</form>
+<!--删除弹窗内容-->
+
+</body>
+</html>
+<script src="../static/layui/layui.js"></script>
+<script>
+    var layer,$,form,index,delindex,table,upload;
+    layui.use(['table','layer','jquery','form','upload'], function(){
+        table = layui.table;
+        layer=layui.layer;
+        $=layui.jquery;
+        form=layui.form;
+        upload=layui.upload;
+
+        //普通图片上传
+        upload.render({
+            elem: '#test1'
+            ,url: 'upload.php'
+            ,size:500
+            ,done: function(res){
+                //上传成功
+                if(res.code==200){
+                    layer.msg(res.msg,{icon:1});
+                    $('input[name="head_img"]').val(res.data);
+                    $('#demo1').attr('src','../'+res.data);
+                }
+                //如果上传失败
+            }
+        });
+
+        //方法渲染
+        table.render({
+            elem: '#demo',
+            url: 'team.php?type=querys',
+            page:true,
+            limit:5,
+            limits:[5,10,15,20],
+            cols: [[ //表头
+                {field: 'tid', title: 'ID',sort: true, fixed: 'left'},
+                {field: 'tname', title:'团队名称'},
+                {field: 'position', title: '团队职位'},
+                {field: 'head_img', title: '团队头像',
+                    templet:function (d) {
+                        return `<img src="../${d.head_img}" width="50px",height="50px">`
+                    }
+                },
+                {fixed: 'right', title:'操作', toolbar: '#barDemo'}
+            ]]
+        });
+
+        //修改数据
+        form.on('submit(formDemo)',function (data) {
+            $.post('team.php?type=updates',data.field,function (res) {
+                let data=JSON.parse(res);
+                if (data.code==200){
+                    layer.close(index);
+                    layer.msg(data.msg,{icon:6})
+                    table.reload('demo')
+                }else{
+                    layer.msg(data.msg,{icon:5});
+                }
+            });
+            return false;
+        })
+    });
+    //点击编辑按钮
+    function edits(tid) {
+        index=layer.open({
+            type:1,
+            title:'修改团队信息',
+            area:['400px','300px'],
+            skin:'layui-layer-molv',
+            content:$('#editForm')
+        });
+        console.log(tid);
+        //当前这条数据
+        $.get('team.php?type=queryone',{tid:tid},function (res) {
+            // 跳到php处理
+            let data=JSON.parse(res);
+            // console.log(data);
+            if(data.code==200){
+                $("input[name='tid']").val(data.data.tid);
+                $("input[name='tname']").val(data.data.tname);
+                $("input[name='position']").val(data.data.position);
+                $("input[name='head_img']").val(data.data.head_img);
+
+                $('#demo1').attr('src',"../"+data.data.head_img);
+
+            }else{
+                layer.msg(data.msg);
+            }
+        })
+    }
+    //点击删除按钮
+    function dels(tid) {
+        //询问框
+        delindex=layer.confirm('您确定要删除吗？', {
+                title:'删除',
+                skin:'layui-layer-molv',
+                btn: ['确定','取消'] //按钮
+            },
+            function(){
+                $.get('team.php?type=deletes',{tid:tid},function (res) {
+                    let data=JSON.parse(res);
+                    if (data.code==200){
+                        layer.close(delindex);
+                        layer.msg(data.msg,{icon:1});
+                        table.reload('demo')
+                    }else{
+                        layer.msg(data.msg,{icon:2});
+                    }
+                })
+            },
+            function () {
+                layer.close(delindex);
+            })
+    }
+
+</script>

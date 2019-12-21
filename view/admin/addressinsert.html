@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../static/layui/css/layui.css">
+    <style>
+        form{
+            width: 500px;
+            height: 300px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+        }
+        h2{
+            text-align: center;
+            margin-top: 30px;
+        }
+        img{
+            width: 100px;
+        }
+
+    </style>
+</head>
+<body>
+<h2>分店添加页面</h2>
+<!--表单-->
+<form class="layui-form" action="">
+    <!--1.分店名称-->
+    <div class="layui-form-item">
+        <label class="layui-form-label">分店名</label>
+        <div class="layui-input-block">
+            <input type="text" name="store" required  lay-verify="required" placeholder="请输入分店名" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <!--2.分店地址-->
+    <div class="layui-form-item">
+        <label class="layui-form-label">分店地址</label>
+        <div class="layui-input-block">
+            <input type="text" name="addr" required  lay-verify="required" placeholder="请输入分店地址" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <!--3.预约电话-->
+    <div class="layui-form-item">
+        <label class="layui-form-label">预约电话</label>
+        <div class="layui-input-block">
+            <input type="text" name="tel" required  lay-verify="required" placeholder="请输入预约电话" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <!--4.周一至周五-->
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">周一至周五</label>
+            <div class="layui-input-inline">
+                <input type="text" name="time1" class="layui-input" id="test9" placeholder=" - ">
+            </div>
+        </div>
+    </div>
+
+    <!--5.周末-->
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">周末</label>
+            <div class="layui-input-inline">
+                <input type="text" name="time2" class="layui-input" id="test92" placeholder=" - ">
+            </div>
+        </div>
+    </div>
+    <!--6.排序-->
+    <div class="layui-form-item">
+        <label class="layui-form-label">分店排序</label>
+        <div class="layui-input-block">
+            <input type="text" name="asort" required  lay-verify="required" placeholder="请输入分店排序" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+
+    <!--4.提交按钮-->
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+    </div>
+
+</form>
+
+</body>
+</html>
+<script src="../static/layui/layui.js"></script>
+<script>
+    layui.use(['layer','form','jquery','laydate'],function () {
+        var {layer,form,$,laydate}=layui;
+
+        //时间范围
+        laydate.render({
+            elem: '#test9'
+            ,type: 'time'
+            ,range: true
+        });
+        //时间范围
+        laydate.render({
+            elem: '#test92'
+            ,type: 'time'
+            ,range: true
+        });
+
+        form.on('submit(formDemo)',function (data) {
+            $.ajax({
+                type:"post",
+                url:"addressinsert.php",
+                data:data.field,
+                dataType:"json",
+                success:function (res) {
+                    if (res.code==200){
+                        layer.msg(res.msg);
+                    }else{
+                        layer.msg(res.msg);
+                    }
+                }
+            })
+            return false;
+        })
+
+    })
+</script>

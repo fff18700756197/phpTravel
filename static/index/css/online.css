@@ -1,0 +1,127 @@
+.banner6{
+	width: 1024px;
+	height: 375px;
+	/*background: red;*/
+	margin: 30px auto;
+}
+.banner6 img{
+	width: 1024px;
+	height: 375px;
+}
+
+/*表单*/
+input[type="text"]{
+	width: 250px;
+	height: 24px;
+	border-radius: p4x;
+	border-width: 1px !important;
+    border-color: #E1E1E1 !important;
+    outline: none;
+}
+textarea{
+	width: 250px;
+	height: 63px;
+	outline: none;
+	resize: none;
+}
+input {
+	 outline: none; /*// 去除选中状态边框*/
+}
+ 
+
+
+form{
+	width: 482px;
+	height: 388px;
+	/*background: red;*/
+	margin: 30px auto;
+}
+.biaodan1{
+	width: 382px;
+	height: 27px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+.biaodan1 label{
+	width: 100px;
+	width: 24px;
+	font-size: 14px;
+	line-height:14px;
+	margin-right: 40px;
+}
+.biaodansle{
+	height: 24px;
+	font-size: 14px;
+}
+.biaodansle2{
+	height: 24px;
+	font-size: 14px;
+	width: 70px;
+}
+.ipt1{
+	height: 24px;
+	font-size: 14px;
+}
+
+.biaodan2{
+	width: 382px;
+	height: 66px;
+	position: relative;
+
+}
+.biaodan2 label{
+	box-sizing: border-box;
+	width: 100px;
+	width: 24px;
+	font-size: 14px;
+	line-height:14px;
+	margin-right: 40px;
+
+}
+textarea{
+	font-size: 14px;
+	position: absolute;
+	top: 0;
+	left: 114px;
+}
+.yzhm{
+	width: 115px;
+	height: 40px;
+ 	margin-left: 115px;
+}
+.yzhm img{
+	display: block;
+	width: 115px;
+	height: 40px;
+}
+.btn{
+	color: #fffaff;
+	font-size: 14px;
+	line-height:14px;
+	padding-left: 20px !important;
+	background-color: #333333;
+	border: 1px solid #333333;
+	padding:6px 20px 6px 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

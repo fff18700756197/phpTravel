@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../static/layui/css/layui.css">
+    <link rel="stylesheet" href="../static/admin/css/login.css">
+</head>
+<body>
+<div class="layui admin">
+    <p>后台登录</p>
+<!--登录表单-->
+<form class="layui-form" action="" style="margin-top: 100px">
+    <!--用户名-->
+    <div class="layui-form-item">
+        <label class="layui-form-label">用户名</label>
+        <div class="layui-input-block">
+            <input type="text" name="username" required  lay-verify="required" placeholder="请输入用户名" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <!--密码-->
+    <div class="layui-form-item">
+        <label class="layui-form-label">密&nbsp;&nbsp;&nbsp;码</label>
+        <div class="layui-input-inline">
+            <input type="password" name="password" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input input2">
+        </div>
+    </div>
+    <!--登录按钮-->
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="formDemo">立即登录</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+    </div>
+</form>
+</div>
+</body>
+</html>
+<script src="../static/layui/layui.js"></script>
+<script>
+    //一般直接写在一个js文件中
+    layui.use(['layer', 'form','jquery'], function(){
+        var {form,$,layer}=layui;
+
+        form.on('submit(formDemo)',function(data){
+            // console.log("elem");
+            $.ajax({
+                type:"post",
+                url:"login.php",
+                data:data.field,
+                dataType:'json',
+                success:function (res) {
+                    if (res.code==200){
+                        location.href="main.php";
+                    }else{
+                        //弹出层
+                        layer.msg(res.msg);
+                    }
+                }
+            })
+            return false;
+        })
+    });
+</script>
